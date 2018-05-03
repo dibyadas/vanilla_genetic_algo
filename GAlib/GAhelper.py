@@ -6,6 +6,19 @@
 
 import random
 
+def mutate(mating_pool, mu_prob, no_of_points):
+    # temp = []
+    for i in range(len(mating_pool)):
+        if random.randint(0,999)/1000 < mu_prob:
+            points_of_mutation = random.sample(range(len(mating_pool[0])),no_of_points)
+            for j in points_of_mutation:
+                if mating_pool[i][j] == '0':
+                    mating_pool[i] = mating_pool[i][:j] + '1' + mating_pool[i][j+1:]
+                elif mating_pool[i][j] == '1':
+                    mating_pool[i] = mating_pool[i][:j] + '0' + mating_pool[i][j+1:]
+    random.shuffle(mating_pool)
+    return mating_pool
+
 def make_crossover(mating_pool, co_prob):
     for i in range(len(mating_pool)-1):
         if random.randint(0,99)/100 < co_prob:
